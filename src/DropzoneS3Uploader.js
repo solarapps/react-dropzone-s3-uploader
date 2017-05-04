@@ -25,6 +25,7 @@ export default class DropzoneS3Uploader extends React.Component {
     onError: PropTypes.func,
     onProgress: PropTypes.func,
     onFinish: PropTypes.func,
+    onFinishAll: PropTypes.func,
 
     // Passed to react-s3-uploader
     upload: PropTypes.object.isRequired,
