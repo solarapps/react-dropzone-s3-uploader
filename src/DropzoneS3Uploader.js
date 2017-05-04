@@ -118,10 +118,14 @@ export default class DropzoneS3Uploader extends React.Component {
     this.setState({uploadedFiles, error: null, progress: null}, () => {
       this.props.onFinish && this.props.onFinish(uploadedFile)
     })
+
+    if (uploadedFiles.length === this.state.totalUploadAmount) {
+      this.props.onFinishAll && this.props.onFinishAll(uploadedFiles);
+    }
   }
 
   handleDrop = (files, rejectedFiles) => {
-    this.setState({uploadedFiles: [], error: null, progress: null})
+    this.setState({uploadedFiles: [], error: null, progress: null, totalUploadAmount: files.length})
     const options = {
       files,
       ...this.state.uploaderOptions,
