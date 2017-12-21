@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import S3Upload from 'react-s3-uploader/s3upload'
 import Dropzone from 'react-dropzone'
 
@@ -46,7 +47,6 @@ export default class DropzoneS3Uploader extends React.Component {
     passChildrenProps: true,
     isImage: filename => filename && filename.match(/\.(jpeg|jpg|gif|png|svg)/i),
     notDropzoneProps: ['onFinish', 's3Url', 'filename', 'host', 'upload', 'isImage', 'notDropzoneProps'],
-
     style: {
       width: 200,
       height: 200,
@@ -88,6 +88,7 @@ export default class DropzoneS3Uploader extends React.Component {
     this.setState({
       uploaderOptions: Object.assign({
         signingUrl: '/s3/sign',
+        s3path: '',
         contentDisposition: 'auto',
         uploadRequestHeaders: {'x-amz-acl': 'public-read'},
         onFinishS3Put: this.handleFinish,
@@ -102,8 +103,8 @@ export default class DropzoneS3Uploader extends React.Component {
     this.setState({progress})
   }
 
-  handleError = err => {
-    this.props.onError && this.props.onError(err)
+  handleError = (err, file) => {
+    this.props.onError && this.props.onError(err, file)
     this.setState({error: err, progress: null})
   }
 
@@ -115,7 +116,6 @@ export default class DropzoneS3Uploader extends React.Component {
 
     const uploadedFiles = this.state.uploadedFiles
     uploadedFiles.push(uploadedFile)
-
     this.setState({uploadedFiles, error: null, progress: null}, () => {
       this.props.onFinish && this.props.onFinish(uploadedFile)
     })

@@ -1,6 +1,6 @@
 {
   "name": "react-dropzone-s3-uploader",
-  "version": "1.0.0-rc.3",
+  "version": "1.1.0",
   "description": "Drag and drop s3 file uploader via react-dropzone + react-s3-uploader",
   "main": "lib/index.js",
   "author": {
@@ -19,11 +19,9 @@
     "test": "eval $(cat test/.env) mocha test/**/*.tests.js"
   },
   "dependencies": {
-    "react-dropzone": "^3.7.3",
-    "react-s3-uploader": "^4.0.0"
-  },
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0"
+    "prop-types": "^15.5.8",
+    "react-dropzone": "^4.0.0",
+    "react-s3-uploader": "4.5.0"
   },
   "devDependencies": {
     "babel": "^5.6.14",
